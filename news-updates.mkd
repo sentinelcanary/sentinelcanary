@@ -1,7 +1,7 @@
 To update the news on the main page:
 ====================================
 
-Login to you WordPress account at: http://news.canarydatabase.org
+Login to your WordPress account at: http://news.canarydatabase.org
 
 Make a new post, and make sure you file it under: Project News
 
