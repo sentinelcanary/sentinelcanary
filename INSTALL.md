@@ -11,8 +11,8 @@ Currently the only configurable thing is the name of the user that will own the
 canary installation and run the processes. Defaults to 'canary', can be changed
 at the top of setup.sh.
 
-The first thing to do is run setup.sh from the root of this repo. You'll see a
-bunch of packages getting installed. The MySQL package will ask you for
+The first thing to do is run bin/setup.sh from the root of this repo. You'll see
+a bunch of packages getting installed. The MySQL package will ask you for
 a password for the root MySQL user. Pick a good one. Keep it secret, keep it
 safe, and keep it handy; you'll need this later on.
 
