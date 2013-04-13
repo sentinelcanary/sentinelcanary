@@ -20,8 +20,8 @@ ERROR_LOG = LOG_DIR + '/error.log'
 
 ERROR_EMAIL = None
 
-DISPLAY_EXCEPTIONS = "html" # None
-SECURE_ERRORS = 0
+DISPLAY_EXCEPTIONS = None
+SECURE_ERRORS = 1
 
 FIX_TRAILING_SLASH = 1
 
@@ -83,4 +83,3 @@ ROBOTS_TXT = {'SomeAgent': ['/path1', '/path2'],
 # Must be one of ('general', 'yale').
 AUTHN_MODE = "general"
 #AUTHN_MODE = "yale"
-
