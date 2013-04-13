@@ -1,0 +1,26 @@
+<VirtualHost *>
+    ServerName localhost
+    ServerAlias localhost
+    ServerAdmin daniel.chudnov@gmail.com
+
+    SCGIMount / 127.0.0.1:4001
+    <Location "/">
+        SetHandler scgi-handler
+        SCGIServer localhost:4001
+        SCGIHandler On
+    </Location>
+
+    # Get images directly from the filesystem.
+    Alias /images "/canary/sentinel/build/lib/canary/ui/images"
+    <Location /images>
+        SCGIHandler Off
+        SetHandler None
+    </Location>
+
+    # Get javascript directly from the filesystem.
+    Alias /static "/canary/sentinel/build/lib/canary/ui/html"
+    <Location /static>
+        SCGIHandler Off
+        SetHandler None
+    </Location>
+</VirtualHost>
