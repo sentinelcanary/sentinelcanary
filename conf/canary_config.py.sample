@@ -13,7 +13,7 @@ LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = '%(asctime)s %(name)s:%(lineno)s %(levelname)-8s %(message)s'
 
 # Where do the logs go?
-LOG_DIR = "/home/user/sites/canary_project/logs"
+LOG_DIR = "/canary/log"
 ACCESS_LOG = LOG_DIR + '/access.log'
 DEBUG_LOG = LOG_DIR + '/debug.log'
 ERROR_LOG = LOG_DIR + '/error.log'
@@ -32,7 +32,7 @@ MAIL_FROM = "foo@example.com"     # eg. "webmaster@example.com"
 MAIL_SERVER = "localhost"
 MAIL_DEBUG_ADDR = "foo@example.com"   # eg. "developers@example.com"
 
-UPLOAD_DIR = "/home/user/sites/canary_project/upload"
+UPLOAD_DIR = "/canary/upload"
 
 # Variables defined locally for sentineltestsite.
 # Note that quixote.config.Config has been subclassed
@@ -46,14 +46,14 @@ SESSION_COOKIE_PATH = "/"
 SITE_BASE_URL = "localhost"
 
 DB_HOST = "localhost"
-DB_NAME = "dbname"
-DB_USER = "dbuser"
-DB_PASSWD = "dbpass"
+DB_NAME = "canary_prod"
+DB_USER = "canary"
+DB_PASSWD = ""
 
 
-STATIC_HTML_DIR = "/home/user/projects/canary/canary/ui/html"
-STATIC_IMAGE_DIR = "/home/user/projects/canary/canary/ui/images"
-TEMP_IMAGE_DIR = "/home/user/projects/canary/temp"
+STATIC_HTML_DIR = "/canary/canary/canary/ui/html"
+STATIC_IMAGE_DIR = "/canary/canary/canary/ui/images"
+TEMP_IMAGE_DIR = "/canary/tmp"
 
 # Use memcached?
 USE_CACHE = True
@@ -68,16 +68,16 @@ SEARCH_INDEX_DIR = "/home/user/sites/canary_project/search-index"
 SITE_STATUS = ""
 SITE_STATUS_NOTE = ""
 
-# Enable robots.txt generation?  
-ENABLE_ROBOTS_TXT = False  
+# Enable robots.txt generation?
+ENABLE_ROBOTS_TXT = False
 
-# robots.txt content  
-ROBOTS_TXT = {'SomeAgent': ['/path1', '/path2'],  
-    'AnotherAgent': ['/']  
-    }  
+# robots.txt content
+ROBOTS_TXT = {'SomeAgent': ['/path1', '/path2'],
+    'AnotherAgent': ['/']
+    }
 
-# Shorthand name for authentication (provides 'login', 'logout' 
-# template functions).  Change this if you want to handle 
+# Shorthand name for authentication (provides 'login', 'logout'
+# template functions).  Change this if you want to handle
 # authentication another way in your local instance.
 #
 # Must be one of ('general', 'yale').
