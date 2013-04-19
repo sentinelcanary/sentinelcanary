@@ -43,10 +43,7 @@ $AS_USER "$WORKING_DIR/bin/install-deps.sh"
 
 # clone the project
 sudo chmod 777 $CANARY_HOME
-git clone git@github.com:lynaghk/canary
-pushd canary
-git checkout -b redeploy origin/redeploy
-popd
+git clone https://github.com/sentinelcanary/sentinelcanary canary
 sudo chown -R $USER:$USER canary
 sudo chmod 755 $CANARY_HOME
 
