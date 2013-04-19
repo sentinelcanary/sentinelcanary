@@ -81,6 +81,7 @@ popd
 rm -rf ssl-1.15*
 
 install_from http://quixote.python.ca/releases/Quixote-1.3.tar.gz
+install_from https://pypi.python.org/packages/source/p/python-cjson/python-cjson-1.0.5.tar.gz
 install_from https://s3.amazonaws.com/org.aperiodic/canary-deps/Dulcinea-0.1.tar.gz
 install_from https://downloads.egenix.com/python/egenix-mx-base-2.0.6.tar.gz
 install_from http://sourceforge.net/projects/pyparsing/files/pyparsing/pyparsing-1.3/pyparsing-1.3.tar.gz/download pyparsing-1.3.tar.gz
@@ -104,7 +105,6 @@ python setup.py install
 popd
 
 pip install mysql-python
-pip install simplejson
 pip install motionless
 pip install unidecode
 
