@@ -71,7 +71,6 @@ fi
 $AS_USER "$EDITOR canary/conf/canary_config.py"
 
 # that should be it
-echo "If the SCGI handler would start, then you'd be able to see the site now."
-echo "As it stands you'll just get an error from apache after a while."
+echo "All done! You should be able to see the site now."
 
 popd >/dev/null
