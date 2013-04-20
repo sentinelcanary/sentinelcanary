@@ -56,7 +56,7 @@ STATIC_IMAGE_DIR = "/canary/canary/canary/ui/images"
 TEMP_IMAGE_DIR = "/canary/tmp"
 
 # Use memcached?
-USE_CACHE = True
+USE_CACHE = False
 
 # List of memcached servers
 CACHE_SERVER_LIST = ['127.0.0.1:11234']
