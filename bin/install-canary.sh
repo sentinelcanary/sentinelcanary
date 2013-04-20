@@ -37,13 +37,12 @@ sudo cp canary/conf/etc/cron.daily/canary /etc/cron.daily/
 # create and load database
 echo "Please enter the MySQL root password"
 echo "create database canary_prod character set utf8; grant all on canary_prod.* to 'canary'@'localhost';" | mysql -u root -p
-
-printf "Loading production database..."
 mysql canary_prod < canary/doc/database-schema.sql
-printf "DONE\n"
 
 pushd downloads
 wget https://s3.amazonaws.com/canarydatabase.org/20130227-canary_prod.sql.gz
 gunzip 20130227-canary_prod.sql.gz
+printf "Loading production database..."
 mysql canary_prod < 20130227-canary_prod.sql
+printf "DONE\n"
 popd
