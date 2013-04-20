@@ -123,7 +123,10 @@ rm PyLucene-0.9.8.tar.gz
 pushd PyLucene-0.9.8
 sudo mkdir -p /usr/local/gcc-3.4.3/lib/security
 sudo cp *.security /usr/local/gcc-3.4.3/lib/security
+sudo cp libgcj.so.5 /usr/local/lib
 make install
+echo "/usr/local/lib" | sudo tee /etc/ld.so.conf.d/canary >/dev/null
+sudo /sbin/ldconfig
 popd
 
 popd
