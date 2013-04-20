@@ -1,16 +1,11 @@
 #!/bin/bash
-# install canary itself
+# configure canary itself
 #
 # note that we assume that our working directory is the canary install root
 
 set -e
 
 source ENV/bin/activate
-
-# install the project
-pushd canary
-python setup.py install
-popd
 
 # create dirs referenced in canary_config.py
 mkdir -p log

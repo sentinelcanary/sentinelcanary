@@ -52,8 +52,8 @@ git clone https://github.com/sentinelcanary/sentinelcanary canary
 sudo chown -R $USER:$USER canary
 sudo chmod 775 $CANARY_HOME
 
-# install & configure
-$AS_USER "$WORKING_DIR/bin/install-canary.sh"
+# configure
+$AS_USER "$WORKING_DIR/bin/configure-canary.sh"
 
 # remove user from sudoers
 sudo cat /etc/sudoers | head -n -1 | sudo tee /etc/sudoers >/dev/null
@@ -72,8 +72,9 @@ if [ $MAYBE_DIFFERENT_EDITOR ]; then
 fi
 $AS_USER "$EDITOR canary/conf/canary_config.py"
 
+# install & start canary
 pushd canary
-$AS_USER "source ../ENV/bin/activate; ./bin/startup.sh"
+$AS_USER "source ../ENV/bin/activate; python setup.py install; ./bin/startup.sh"
 popd
 
 # that should be it
