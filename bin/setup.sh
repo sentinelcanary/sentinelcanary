@@ -42,10 +42,8 @@ source ENV/bin/activate
 $AS_USER "$WORKING_DIR/bin/install-deps.sh"
 
 # clone the project
-sudo chmod 777 $CANARY_HOME
 git clone https://github.com/sentinelcanary/sentinelcanary canary
 sudo chown -R $USER:$USER canary
-sudo chmod 755 $CANARY_HOME
 
 # install & configure
 $AS_USER "$WORKING_DIR/bin/install-canary.sh"
@@ -66,6 +64,10 @@ if [ $MAYBE_DIFFERENT_EDITOR ]; then
   EDITOR=$MAYBE_DIFFERENT_EDITOR
 fi
 $AS_USER "$EDITOR canary/conf/canary_config.py"
+
+pushd canary
+$AS_USER "./bin/startup.sh"
+popd
 
 # that should be it
 echo "All done! You should be able to see the site now."
