@@ -47,8 +47,10 @@ source ENV/bin/activate
 $AS_USER "$WORKING_DIR/bin/install-deps.sh"
 
 # clone the project
+sudo chmod 777 $CANARY_HOME
 git clone https://github.com/sentinelcanary/sentinelcanary canary
 sudo chown -R $USER:$USER canary
+sudo chmod 775 $CANARY_HOME
 
 # install & configure
 $AS_USER "$WORKING_DIR/bin/install-canary.sh"
