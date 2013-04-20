@@ -73,7 +73,7 @@ fi
 $AS_USER "$EDITOR canary/conf/canary_config.py"
 
 pushd canary
-$AS_USER "./bin/startup.sh"
+$AS_USER "source ../ENV/bin/activate; ./bin/startup.sh"
 popd
 
 # that should be it
