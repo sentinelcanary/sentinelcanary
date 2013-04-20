@@ -18,18 +18,22 @@ mkdir -p search-index
 mkdir -p tmp
 mkdir -p upload
 
-# configure apache
+# install apache2 scgi module
 pushd downloads/scgi-1.13/apache2
 make
 sudo make install
 popd
 
+# configure apache mods, sites
 sudo cp canary/conf/etc/apache2/mods/* /etc/apache2/mods-available/
 sudo ln -s /etc/apache2/mods-available/scgi.conf /etc/apache2/mods-enabled/scgi.conf
 sudo ln -s /etc/apache2/mods-available/scgi.load /etc/apache2/mods-enabled/scgi.load
+
 sudo cp canary/conf/etc/apache2/sites/* /etc/apache2/sites-available/
 sudo ln -s /etc/apache2/sites-available/canary /etc/apache2/sites-enabled/canary
-sudo /usr/sbin/apache2ctl restart
+sudo rm /etc/apache2/sites-available/*default
+
+sudo service apache2 restart
 
 # add temp image removal script
 sudo cp canary/conf/etc/cron.daily/canary /etc/cron.daily/
