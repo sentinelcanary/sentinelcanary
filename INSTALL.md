@@ -33,9 +33,22 @@ be asked for it now.
 
 Part of configuring canary involves creating the MySQL database, which requires
 that you enter the MySQL root password you created earlier. Now the script will
-load the production canary database, which may take some time (we're nearly
-done after this, though).
+load the production canary database, which may take some time (don't worry;
+we're more than halfway there!).
 
-Finally, you'll be asked to edit the canary_config.py file. All of the paths and
-database options in here are already properly configured, you should just change
-the server name, cookie domain, email addresses, and the like.
+Now it's your turn to step up to the plate. You'll be asked to edit the
+canary_config.py file. All of the paths and database options in here are already
+properly configured, you should just change the server name, cookie domain,
+email addresses, and the like. (I'm Not entirely sure what the server named by
+the MAIL_SERVER variable needs to have; that's a question for DChud.)
+
+With configuration over, canary can finally be installed into its virtualenv.
+After installation, the test_lucene_indexing script is run, which seems to be
+necessary to load the data. The script will load up through record index 6826
+but only load 6566 records total. Some of this is due to missing records, others
+might be due to a few records that have bad string data that causes python to
+complain about the encoding.
+
+Once the records are loaded, the scgi handler will be started and the script
+will finish. If you see a Python stack trace, something went wrong. If not,
+you'll see the site on the server's port 80!

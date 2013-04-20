@@ -74,7 +74,10 @@ $AS_USER "$EDITOR canary/conf/canary_config.py"
 
 # install & start canary
 pushd canary
-$AS_USER "source ../ENV/bin/activate; python setup.py install; ./bin/startup.sh"
+$AS_USER "source ../ENV/bin/activate;
+  python setup.py install;
+  ./bin/scripts/test_lucene_indexing.py;
+  ./bin/startup.sh;"
 popd
 
 # that should be it
