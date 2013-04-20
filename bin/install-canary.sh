@@ -45,7 +45,9 @@ mysql canary_prod < canary/doc/database-schema.sql
 
 pushd downloads
 wget https://s3.amazonaws.com/canarydatabase.org/20130227-canary_prod.sql.gz
+printf "Unzipping production database SQL file..."
 gunzip 20130227-canary_prod.sql.gz
+printf "DONE\n"
 printf "Loading production database..."
 mysql canary_prod < 20130227-canary_prod.sql
 printf "DONE\n"
