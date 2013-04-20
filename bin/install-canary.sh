@@ -31,7 +31,7 @@ sudo ln -s /etc/apache2/mods-available/scgi.load /etc/apache2/mods-enabled/scgi.
 
 sudo cp canary/conf/etc/apache2/sites/* /etc/apache2/sites-available/
 sudo ln -s /etc/apache2/sites-available/canary /etc/apache2/sites-enabled/canary
-sudo rm /etc/apache2/sites-available/*default
+sudo rm /etc/apache2/sites-enabled/*default
 
 sudo service apache2 restart
 
