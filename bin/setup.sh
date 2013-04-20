@@ -21,6 +21,11 @@ WORKING_DIR=`pwd`
 
 set -e
 
+# install sudo if not present
+if [[ ( ! -e /usr/bin/sudo ) && ( `whoami` == "root" ) ]]; then
+  apt-get install sudo
+fi
+
 # install python and other system dependencies
 ./bin/install-python.sh
 
