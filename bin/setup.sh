@@ -31,7 +31,7 @@ fi
 
 # create user & add to sudoers
 sudo adduser $USER
-echo "canary ALL=(ALL) ALL" | sudo tee -a /etc/sudoers >/dev/null
+echo "$USER ALL=(ALL) ALL" | sudo tee -a /etc/sudoers >/dev/null
 
 # create canary installation directory & go there
 sudo mkdir -p $CANARY_HOME
