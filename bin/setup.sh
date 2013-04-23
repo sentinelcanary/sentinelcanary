@@ -46,7 +46,7 @@ source ENV/bin/activate
 # install project's python dependencies
 cp $WORKING_DIR/bin/install-deps.sh .
 chmod 777 install-deps.sh
-$AS_USER "install-deps.sh"
+$AS_USER "./install-deps.sh"
 rm install-deps.sh
 
 # clone the project
@@ -56,9 +56,9 @@ sudo chown -R $USER:$USER canary
 sudo chmod 775 $CANARY_HOME
 
 # configure
-cp $WORKING_DIR/bin/configure-canary.sh
+cp $WORKING_DIR/bin/configure-canary.sh .
 chmod 777 configure-canary.sh
-$AS_USER "configure-canary.sh"
+$AS_USER "./configure-canary.sh"
 rm configure-canary.sh
 
 # remove user from sudoers
