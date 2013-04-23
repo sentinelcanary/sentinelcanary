@@ -44,8 +44,10 @@ $AS_USER 'virtualenv --no-site-packages --python=/usr/local/bin/python ENV'
 source ENV/bin/activate
 
 # install project's python dependencies
-chmod 777 $WORKING_DIR/bin/install-deps.sh
-$AS_USER "$WORKING_DIR/bin/install-deps.sh"
+cp $WORKING_DIR/bin/install-deps.sh .
+chmod 777 install-deps.sh
+$AS_USER "install-deps.sh"
+rm install-deps.sh
 
 # clone the project
 sudo chmod 777 $CANARY_HOME
@@ -54,8 +56,10 @@ sudo chown -R $USER:$USER canary
 sudo chmod 775 $CANARY_HOME
 
 # configure
-chmod 777 $WORKING_DIR/bin/configure-canary.sh
-$AS_USER "$WORKING_DIR/bin/configure-canary.sh"
+cp $WORKING_DIR/bin/configure-canary.sh
+chmod 777 configure-canary.sh
+$AS_USER "configure-canary.sh"
+rm configure-canary.sh
 
 # remove user from sudoers
 sudo cat /etc/sudoers | head -n -1 | sudo tee /etc/sudoers >/dev/null

@@ -2,8 +2,7 @@ Supported Distros
 =================
 
 This is only known to work on 32-bit Debian 6 (Squeeze). It is also known
-to fail on Ubuntu 12.04 because Python 2.5.6 won't build, though I suspect
-that's a package thing.
+to fail on Ubuntu 12.04 because Python 2.5.6 fails to build.
 
 Installing Canary
 =================
