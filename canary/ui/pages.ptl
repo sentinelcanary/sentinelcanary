@@ -237,82 +237,61 @@ def not_found [html] (item_type='item'):
 
 
 def login_general [html] (request):
-
     context = get_publisher().context
-    # redirect if the user is already logged in
-    try:
-        if request.session.user != None:
-            request.redirect(str('/user'))
-    except:
-        pass
-        
+    config = context.config
+    
     form = MyForm(context)
     form.method = 'post'
     form.action_url = '/login'
-    form.add(form2.StringWidget, 'user_email', 
-        title='Your email address',
-        size=20, 
-        required=True)
-    form.add(form2.PasswordWidget, 'user_pass', 
-        title='Password',
-        size=10, 
-        required=True)
     form.add_hidden('go', None)
     form.add_submit('login', 'login')
 
-    form_reset_pass = MyForm(context)
-    form_reset_pass.method = 'post'
-    form_reset_pass.action_url = '/resetpass'
-    form_reset_pass.add(form2.StringWidget, 'user_email',
-        title='Your email address',
-        size=20,
-        required=True)
-    form_reset_pass.add_submit('send', 'send')
+    go = str('/user')
+    if form.is_submitted() \
+        and form['go']:
+        go = form['go']
+    
+    # If they are successfully logged in, then bounce
+    if getattr(request.session, str('user'), None):
+        request.redirect(go)
 
-    def render [html] ():
-        header('Log in')
-        """
-        <h3>Log in:</h3>
-        """
-        form.render()
-        """
-        <h3>Forgot your password?</h3>
-        
-        <p>
-        Enter your email address below.  If your address matches your active
-        account address, we will reset your password and send you a new one.
-        </p>
-        """
-        form_reset_pass.render()
-        footer()
+    # Otherwise, attempt to validate their ticket
+    try:
+        ticket = request.get_form_var(str('ticket'), '')
+        if ticket:
+            validate_url = 'https://secure.its.yale.edu/cas/servlet/validate'
+            my_url = config.site_base_url + '/login'
+            params = '?service=%s&ticket=%s' % (my_url, ticket)
+            cas_data = urllib.URLopener().open(str(validate_url + params))
+            test = str(cas_data.readline()).strip()
+            if test == 'yes':
+                net_id = cas_data.readline().strip()
+                user = get_user_by_yale_netid(context, net_id)
+                if user:
+                    context.logger.debug('Found user: %s', user)
+                    session_mgr = get_session_manager()
+                    #request.session = session_mgr.get_session(request)
+                    request.session.set_user(user)
+                    request.redirect(go)
+    except:
+        import traceback
+        context.logger.error('Yale login error: %s', traceback.print_exc())
 
-    if not form.is_submitted():
-        return render()
+    cas_url = 'https://secure.its.yale.edu/cas/login'
+    params = 'service=%s/login' % config.site_base_url
+    login_url = cas_url + '?' + params
+    
+    from canary.ui.pageframe import header, footer
+    header('Log in')
+    """
+    <h3>Log in</h3>
 
-    user_email = form['user_email']
-    user_pass = form['user_pass']
-    user = get_user_by_email(context, user_email)
-    if user == None:
-        form.logger.error('Invalid user email %s', user_email)
-        form.set_error('user_email', 'Invalid user email or password.')
-    else:
-        if not user.valid_password(user_pass):
-            form.logger.error('Invalid password')
-            form.set_error('user_email', 'Invalid user email or password')
-
-    if form.has_errors():
-        return render()
-
-    session_mgr = get_session_manager()
-    request.session.set_user(user)
-        
-    form.logger.info(str('User %s logged in' % user.id))
-        
-    if form['go']:
-        return request.redirect(form['go'])
-    else:
-        return request.redirect(str('/user/'))
-
+    <p>
+    If you are Canary project staff at Yale,
+    please log in through the <a href='%s'>Yale CAS</a>.
+    </p>
+    """ % login_url
+    footer()
 
 def login_yale [html] (request):
     context = get_publisher().context
