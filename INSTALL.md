@@ -57,4 +57,14 @@ complain about the encoding.
 
 Once the records are loaded, the scgi handler will be started and the script
 will finish. If you see a Python stack trace, something went wrong. If not,
-you'll see the site on the server's port 80!
+you'll see the site on the server's port 80. Wooo!
+
+There's one last thing left to configure, though: the cron job to perodically
+restart canary's scgi handler, since otherwise it appears to eventually lose the
+ability to connect to the mysql database, even though the database is still
+running. Run `su - canary` to become the canary user, and then run `crontab -e`
+to edit the canary user's crontab. Add a line like this:
+```
+0 * * * *    /canary/canary/bin/restart.sh
+```
+to restart the handler every hour.
